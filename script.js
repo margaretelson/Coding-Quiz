@@ -4,8 +4,10 @@ var questionContainerElement = document.getElementById('question-container')
 var questionElement = document.getElementById('question')
 var answerButtonsElement= document.getElementById('answer-buttons')
 var viewScore =document.getElementById('view-score')
-let correctAnswer = 0; 
-let finalScore;
+let correctAnswer = 0
+let finalScore = (correctAnswer / totalAnswers);
+var totalAnswers = questions.length
+
 
 
 
@@ -97,16 +99,15 @@ function setNextQuestion() {
 
 function showQuestion(question) {
     questionElement.innerText = question.question
-    question.answers.forEach(answer => {
+    questions.answers.forEach(answer => {
         var button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
         if (answer.correct) {
             button.dataset.correct = answer.correct
-        }
             correctAnswer ++;
             console.log(correctAnswer)
-         
+        }
         button.addEventListener('click',selectAnswer)
         answerButtonsElement.appendChild(button)
     })
@@ -129,13 +130,12 @@ function selectAnswer (el) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    if (shuffledQuestions.length > currentQuestionIndex + 1){
+    if (shuffledQuestions.length > currentQuestionIndex + 3){
         nextButton.classList.remove ('hide')
     } else {
         startButton.innerText = "Done!"
         startButton.classList.remove('hide')
-         let finalScore = (correctAnswer / 4)
-    alert(finalScore)
+    alert("You have scored" + finalScore)
     }
 }
 
@@ -195,3 +195,4 @@ var questions = [
         ]
     }
 ]
+
