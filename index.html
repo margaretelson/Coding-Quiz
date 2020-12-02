@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css" />
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <title>Coding Quiz</title>
 </head>
 <body>
@@ -16,10 +15,11 @@
             <p>
                 Please answer the following questions in this short coding quiz but be aware as the quiz is timed!
             </p>
+            <div id="count"><strong> Your timer starts now!</strong></div>
             <br>
         </div>
         <div class="container">
-            <div id="question-container" class="hide">
+            <div id="question-container" class='hide'>
                 <div id="question">Question</div>
                 <div id="answer-buttons" class="btn-grid">
                     <button class="btn">Answer 1</button>
@@ -28,11 +28,44 @@
                     <button class="btn">Answer 4</button>
                 </div>
             </div>
-        <div class="controls">
-            <button id="start-btn" class="start-btn btn">Start</button>   
-            <button id="next-btn" class="next-btn btn hide">Next</button>
+            <div class="controls">
+                <button id="start-btn" class="start-btn btn">Start</button>   
+                <button id="next-btn" class="next-btn btn hide">Next</button>
+            </div>
         </div>
-        <div id="results"></div>
+        <br>
+        <div class="clearfix">
+            <div class="card">
+              <h2>Enter your Scores!</h2>
+              <form method="POST">
+                <div class="input-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" placeholder="Jane Doe" />
+                </div>
+                <div class="input-group">
+                  <label for="score">Score</label>
+                  <input type="text" name="score" id="score" placeholder="Number correct out of 4 questions" />
+                </div>
+                <div id="msg"></div>
+                <button id="sign-up"><strong>Submit</strong></button>
+              </form>
+            </div>
+      
+            <div class="card">
+              <h2>High Scores:</h2>
+              <p><strong>Name:</strong> <span id="user-name"></span></p>
+              <p><strong>Score:</strong> <span id="user-score"></span></p>
+              <br>
+              <p><strong>Name:</strong> <span id="user-name"></span></p>
+              <p><strong>Score:</strong> <span id="user-score"></span></p>
+              <br>
+              <p><strong>Name:</strong> <span id="user-name"></span></p>
+              <p><strong>Score:</strong> <span id="user-score"></span></p>
+            </div>
+          </div>
+      
+        
+       
     </div>
 
 

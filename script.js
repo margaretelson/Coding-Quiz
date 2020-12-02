@@ -3,8 +3,75 @@ var nextButton = document.getElementById('next-btn')
 var questionContainerElement = document.getElementById('question-container')
 var questionElement = document.getElementById('question')
 var answerButtonsElement= document.getElementById('answer-buttons')
-var resultsContainer = document.getElementById('results')
+var viewScore =document.getElementById('view-score')
+let correctAnswer = 0; 
+let finalScore;
 
+
+
+var nameInput = document.querySelector("#name");
+var scoreInput = document.querySelector("#score");
+var signUpButton = document.querySelector("#sign-up");
+var msgDiv = document.querySelector("#msg");
+var userNameSpan = document.querySelector("#user-name");
+var userScoreSpan = document.querySelector("#user-score");
+
+renderLastRegistered();
+
+function displayMessage(type, message) {
+  msgDiv.textContent = message;
+  msgDiv.setAttribute("class", type);
+}
+
+function renderLastRegistered() {
+  var name = localStorage.getItem("name");
+  var score = localStorage.getItem("score");
+
+  if (!name || !score) {
+    return;
+  }
+
+  userNameSpan.textContent = name;
+  userScoreSpan.textContent = score;
+}
+
+signUpButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  var name = document.querySelector("#name").value;
+  var score = document.querySelector("#score").value;
+
+  if (name === "") {
+    displayMessage("error", "Name cannot be blank");
+  } else if (score === "") {
+    displayMessage("success", "Sorry you did not score on this quiz!");
+  } else {
+    displayMessage("success", "Entered successfully");
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("score", score);
+    renderLastRegistered();
+  }
+});
+
+
+
+
+
+
+//Timer
+var count = 60;
+var interval = setInterval(function(){
+  document.getElementById('count').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('count').innerHTML='You are out of time!';
+  }
+}, 1000);
+
+
+//Questions
 let shuffledQuestions, curentQuestions
 
 startButton.addEventListener('click', startGame) 
@@ -24,9 +91,9 @@ function startGame() {
 
 function setNextQuestion() {
     resetState()
-    event.stopPropagation();
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
+
 
 function showQuestion(question) {
     questionElement.innerText = question.question
@@ -37,6 +104,9 @@ function showQuestion(question) {
         if (answer.correct) {
             button.dataset.correct = answer.correct
         }
+            correctAnswer ++;
+            console.log(correctAnswer)
+         
         button.addEventListener('click',selectAnswer)
         answerButtonsElement.appendChild(button)
     })
@@ -51,6 +121,7 @@ function resetState(){
     }
 }
 
+
 function selectAnswer (el) {
     var selectedButton = el.target
     var correct = selectedButton.dataset.correct
@@ -61,8 +132,10 @@ function selectAnswer (el) {
     if (shuffledQuestions.length > currentQuestionIndex + 1){
         nextButton.classList.remove ('hide')
     } else {
-        startButton.innerText = "Restart"
+        startButton.innerText = "Done!"
         startButton.classList.remove('hide')
+         let finalScore = (correctAnswer / 4)
+    alert(finalScore)
     }
 }
 
@@ -78,6 +151,10 @@ function setStatusClass(element, correct) {
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
+}
+
+function displayScore() {
+    var viewScore
 }
 
 var questions = [
@@ -98,7 +175,23 @@ var questions = [
             { text: "Javascript Object Notation", correct: true},
             { text: "Java Science On Nodes", correct: false}
         ]
+    },
+    {
+        question: 'What is [Apple, Pear, Orange, Kiwi] an example of?',
+        answers: [
+            { text: "Array", correct: true},
+            { text: "Alert", correct: false},
+            { text: "Boolean", correct: false},
+            { text: "Divs", correct: false}
+        ]
+    },
+    {
+        question: 'What does HTML mean?',
+        answers: [
+            { text: "Hypertext Making Lessons", correct: false},
+            { text: "Harry Thinks Monkeys Lie", correct: false},
+            { text: "Hypertext Markup Language", correct: true},
+            { text: "Hyperlink Time Making Language", correct: false}
+        ]
     }
 ]
-
-resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
