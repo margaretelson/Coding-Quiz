@@ -11,7 +11,7 @@ let finalScore;
 
 var nameInput = document.querySelector("#name");
 var scoreInput = document.querySelector("#score");
-var signUpButton = document.querySelector("#sign-up");
+var submitButton = document.querySelector("#submit");
 var msgDiv = document.querySelector("#msg");
 var userNameSpan = document.querySelector("#user-name");
 var userScoreSpan = document.querySelector("#user-score");
@@ -35,7 +35,7 @@ function renderLastRegistered() {
   userScoreSpan.textContent = score;
 }
 
-signUpButton.addEventListener("click", function(event) {
+submitButton.addEventListener("click", function(event) {
   event.preventDefault();
 
   var name = document.querySelector("#name").value;
