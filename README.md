@@ -6,7 +6,7 @@ On this project, I created a coding quiz from scratch so that a user can go thro
 
 This website was created using HTML, CSS, and Javascript. I'm hoping in the future I would be able to create better accessibility for the users.
 
-[Link to live site.]()
+[Link to live site.](https://margaretelson.github.io/Coding-Quiz/)
 
 ![Image of Coding Quiz](./Coding-Quiz.jpg)
 
@@ -29,4 +29,4 @@ Use VSCode to install.
 
 MIT License
 
-- - - Copyright (c) 2020 Margaret Elson
+- Copyright (c) 2020 Margaret Elson
